@@ -251,7 +251,8 @@ class _PasscodeScreenState extends State<PasscodeScreen> with SingleTickerProvid
 
   _showValidation(bool isValid) {
     if (isValid) {
-      Navigator.maybePop(context).then((pop) => _validationCallback());
+      _validationCallback();
+      // Navigator.maybePop(context).then((pop) => _validationCallback());
     } else {
       controller.forward();
     }
