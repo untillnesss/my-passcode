@@ -33,6 +33,7 @@ class Keyboard extends StatelessWidget {
   final KeyboardUIConfig keyboardUIConfig;
   final KeyboardTapCallback onKeyboardTap;
   final Widget deleteButton;
+  final Function onDeleteButtonPress;
 
   //should have a proper order [1...9, 0]
   final List<String> digits;
@@ -42,6 +43,7 @@ class Keyboard extends StatelessWidget {
     @required this.keyboardUIConfig,
     @required this.onKeyboardTap,
     @required this.deleteButton,
+    @required this.onDeleteButtonPress,
     this.digits,
   }) : super(key: key);
 
@@ -84,7 +86,10 @@ class Keyboard extends StatelessWidget {
                   children: [
                     SizedBox.shrink(),
                     _buildKeyboardDigit(0.toString()),
-                    deleteButton,
+                    GestureDetector(
+                      onTap: this.onDeleteButtonPress,
+                      child: deleteButton,
+                    ),
                   ],
                 ),
               ],

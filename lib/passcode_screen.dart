@@ -121,9 +121,11 @@ class _PasscodeScreenState extends State<PasscodeScreen>
                       children: _buildCircles(),
                     ),
                   ),
-                  _buildKeyboard(enteredPasscode.length == 0
-                      ? widget.cancelButton
-                      : widget.deleteButton),
+                  _buildKeyboard(
+                      enteredPasscode.length == 0
+                          ? widget.cancelButton
+                          : widget.deleteButton,
+                      _onDeleteCancelButtonPressed),
                   widget.bottomWidget != null
                       ? widget.bottomWidget
                       : Container()
@@ -187,9 +189,11 @@ class _PasscodeScreenState extends State<PasscodeScreen>
                       ],
                     ),
                   ),
-                  _buildKeyboard(enteredPasscode.length == 0
-                      ? widget.cancelButton
-                      : widget.deleteButton),
+                  _buildKeyboard(
+                      enteredPasscode.length == 0
+                          ? widget.cancelButton
+                          : widget.deleteButton,
+                      _onDeleteCancelButtonPressed),
                 ],
               ),
             ),
@@ -203,12 +207,14 @@ class _PasscodeScreenState extends State<PasscodeScreen>
         ],
       );
 
-  _buildKeyboard(Widget deleteButton) => Container(
+  _buildKeyboard(Widget deleteButton, Function onDeleteButtonPress) =>
+      Container(
         child: Keyboard(
           onKeyboardTap: _onKeyboardButtonPressed,
           keyboardUIConfig: widget.keyboardUIConfig,
           digits: widget.digits,
           deleteButton: deleteButton,
+          onDeleteButtonPress: onDeleteButtonPress,
         ),
       );
 
