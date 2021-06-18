@@ -126,19 +126,18 @@ class _PasscodeScreenState extends State<PasscodeScreen>
                           ? widget.cancelButton
                           : widget.deleteButton,
                       _onDeleteCancelButtonPressed),
-                  widget.bottomWidget != null
-                      ? widget.bottomWidget
-                      : Container()
                 ],
               ),
             ),
           ),
-          // Positioned(
-          //   child: Align(
-          //     alignment: Alignment.bottomRight,
-          //     child: _buildDeleteButton(),
-          //   ),
-          // ),
+          Positioned(
+            child: Align(
+              alignment: Alignment.bottomCenter,
+              child: widget.bottomWidget != null
+                  ? widget.bottomWidget
+                  : Container(),
+            ),
+          ),
           // _buildDeleteButton(),
           // Positioned(
           //   right: 42,
