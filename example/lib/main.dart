@@ -110,10 +110,16 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
             keyboardUIConfig: keyboardUIConfig,
             passwordEnteredCallback: _onPasscodeEntered,
             cancelButton: cancelButton,
-            deleteButton: Text(
-              'Delete',
-              style: const TextStyle(fontSize: 16, color: Colors.white),
-              semanticsLabel: 'Delete',
+            deleteButton: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Text(
+                  'Delete',
+                  style: const TextStyle(fontSize: 16, color: Colors.white),
+                  semanticsLabel: 'Delete',
+                ),
+              ],
             ),
             shouldTriggerVerification: _verificationNotifier.stream,
             backgroundColor: Colors.black.withOpacity(0.8),

@@ -23,7 +23,8 @@ class KeyboardUIConfig {
     this.primaryColor = Colors.white,
     this.digitFillColor = Colors.transparent,
     this.digitTextStyle = const TextStyle(fontSize: 30, color: Colors.white),
-    this.deleteButtonTextStyle = const TextStyle(fontSize: 16, color: Colors.white),
+    this.deleteButtonTextStyle =
+        const TextStyle(fontSize: 16, color: Colors.white),
     this.keyboardSize,
   });
 }
@@ -31,6 +32,7 @@ class KeyboardUIConfig {
 class Keyboard extends StatelessWidget {
   final KeyboardUIConfig keyboardUIConfig;
   final KeyboardTapCallback onKeyboardTap;
+  final Widget deleteButton;
 
   //should have a proper order [1...9, 0]
   final List<String> digits;
@@ -39,6 +41,7 @@ class Keyboard extends StatelessWidget {
     Key key,
     @required this.keyboardUIConfig,
     @required this.onKeyboardTap,
+    @required this.deleteButton,
     this.digits,
   }) : super(key: key);
 
@@ -48,12 +51,14 @@ class Keyboard extends StatelessWidget {
   Widget _buildKeyboard(BuildContext context) {
     List<String> keyboardItems = List.filled(10, '0');
     if (digits == null || digits.isEmpty) {
-      keyboardItems = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '0'];
+      keyboardItems = ['1', '2', '3', '4', '5', '6', '7', '8', '9'];
     } else {
       keyboardItems = digits;
     }
     final screenSize = MediaQuery.of(context).size;
-    final keyboardHeight = screenSize.height > screenSize.width ? screenSize.height / 2 : screenSize.height - 80;
+    final keyboardHeight = screenSize.height > screenSize.width
+        ? screenSize.height / 2
+        : screenSize.height - 80;
     final keyboardWidth = keyboardHeight * 3 / 4;
     final keyboardSize = this.keyboardUIConfig.keyboardSize != null
         ? this.keyboardUIConfig.keyboardSize
@@ -62,11 +67,30 @@ class Keyboard extends StatelessWidget {
       width: keyboardSize.width,
       height: keyboardSize.height,
       margin: EdgeInsets.only(top: 16),
-      child: AlignedGrid(
-        keyboardSize: keyboardSize,
-        children: List.generate(10, (index) {
-          return _buildKeyboardDigit(keyboardItems[index]);
-        }),
+      child: Column(
+        children: [
+          AlignedGrid(
+            keyboardSize: keyboardSize,
+            children: List.generate(keyboardItems.length, (index) {
+              return _buildKeyboardDigit(keyboardItems[index]);
+            }),
+          ),
+          Container(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                AlignedGrid(
+                  keyboardSize: keyboardSize,
+                  children: [
+                    SizedBox.shrink(),
+                    _buildKeyboardDigit(0.toString()),
+                    deleteButton,
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -86,7 +110,9 @@ class Keyboard extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: BoxShape.circle,
                 color: Colors.transparent,
-                border: Border.all(color: keyboardUIConfig.primaryColor, width: keyboardUIConfig.digitBorderWidth),
+                border: Border.all(
+                    color: keyboardUIConfig.primaryColor,
+                    width: keyboardUIConfig.digitBorderWidth),
               ),
               child: Container(
                 decoration: BoxDecoration(
@@ -117,13 +143,16 @@ class AlignedGrid extends StatelessWidget {
   final List<Widget> children;
   final Size keyboardSize;
 
-  const AlignedGrid({Key key, @required this.children, @required this.keyboardSize})
+  const AlignedGrid(
+      {Key key, @required this.children, @required this.keyboardSize})
       : listSize = children.length,
         super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final primarySize = keyboardSize.width > keyboardSize.height ? keyboardSize.height : keyboardSize.width;
+    final primarySize = keyboardSize.width > keyboardSize.height
+        ? keyboardSize.height
+        : keyboardSize.width;
     final itemSize = (primarySize - runSpacing * (columns - 1)) / columns;
     return Wrap(
       runSpacing: runSpacing,
