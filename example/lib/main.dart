@@ -101,6 +101,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
         PageRouteBuilder(
           opaque: opaque,
           pageBuilder: (context, animation, secondaryAnimation) => PasscodeScreen(
+            headerAction: Text('ini header pa'),
             title: Text(
               'Enter App Passcode',
               textAlign: TextAlign.center,
