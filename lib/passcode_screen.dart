@@ -25,7 +25,7 @@ class PasscodeScreen extends StatefulWidget {
   // Cancel button and delete button will be switched based on the screen state
   final Widget cancelButton;
   final Widget deleteButton;
-  final Widget headerAction;
+  final Widget headerAction, headerWidget;
   final Stream<bool> shouldTriggerVerification;
   final Widget bottomWidget;
   final CircleUIConfig circleUIConfig;
@@ -48,6 +48,7 @@ class PasscodeScreen extends StatefulWidget {
     this.cancelCallback,
     this.digits,
     this.headerAction,
+    this.headerWidget,
   })  : circleUIConfig =
             circleUIConfig == null ? const CircleUIConfig() : circleUIConfig,
         keyboardUIConfig = keyboardUIConfig == null
@@ -109,6 +110,7 @@ class _PasscodeScreenState extends State<PasscodeScreen>
 
   _buildPortraitPasscodeScreen() => Stack(
         children: [
+          widget.headerWidget ?? SizedBox.shrink(),
           Positioned(
             child: Center(
               child: Column(

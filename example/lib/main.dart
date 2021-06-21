@@ -101,6 +101,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
         PageRouteBuilder(
           opaque: opaque,
           pageBuilder: (context, animation, secondaryAnimation) => PasscodeScreen(
+            headerWidget: Text('aksjaks'),
             headerAction: Text('ini header pa'),
             title: Text(
               'Enter App Passcode',
@@ -123,7 +124,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
               ],
             ),
             shouldTriggerVerification: _verificationNotifier.stream,
-            backgroundColor: Colors.black.withOpacity(0.8),
+            backgroundColor: Colors.red.withOpacity(0.8),
             cancelCallback: _onPasscodeCancelled,
             digits: digits,
             passwordDigits: 6,
