@@ -33,7 +33,7 @@ class PasscodeScreen extends StatefulWidget {
   final List<String>? digits;
 
   PasscodeScreen({
-    required Key key,
+    Key? key,
     required this.title,
     this.passwordDigits = 6,
     required this.passwordEnteredCallback,
@@ -57,7 +57,7 @@ class PasscodeScreen extends StatefulWidget {
         super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _PasscodeScreenState();
+  _PasscodeScreenState createState() => _PasscodeScreenState();
 }
 
 class _PasscodeScreenState extends State<PasscodeScreen>

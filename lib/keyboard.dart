@@ -39,7 +39,7 @@ class Keyboard extends StatelessWidget {
   final List<String>? digits;
 
   Keyboard({
-    required Key key,
+    Key? key,
     required this.keyboardUIConfig,
     required this.onKeyboardTap,
     required this.deleteButton,
@@ -149,7 +149,7 @@ class AlignedGrid extends StatelessWidget {
   final Size keyboardSize;
 
   const AlignedGrid(
-      {required Key key, required this.children, required this.keyboardSize})
+      {Key? key, required this.children, required this.keyboardSize})
       : listSize = children.length,
         super(key: key);
 

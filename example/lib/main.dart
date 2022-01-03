@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
 const storedPasscode = '123456';
 
 class ExampleHomePage extends StatefulWidget {
-  ExampleHomePage({required Key key, this.title}) : super(key: key);
+  ExampleHomePage({Key? key, this.title}) : super(key: key);
   final String? title;
 
   @override
@@ -72,7 +72,6 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
       );
 
   _customColorsLockScreenButton(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return MaterialButton(
       color: Theme.of(context).primaryColor,
       child: Text('Open Custom Lock Screen'),
@@ -101,8 +100,8 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
         PageRouteBuilder(
           opaque: opaque,
           pageBuilder: (context, animation, secondaryAnimation) => PasscodeScreen(
-            headerWidget: Text('aksjaks'),
-            headerAction: Text('ini header pa'),
+            // headerWidget: Text('aksjaks'),
+            // headerAction: Text('ini header pa'),
             title: Text(
               'Enter App Passcode',
               textAlign: TextAlign.center,
@@ -197,7 +196,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
           ),
           actions: <Widget>[
             // usually buttons at the bottom of the dialog
-            FlatButton(
+            TextButton(
               child: Text(
                 "Cancel",
                 style: const TextStyle(fontSize: 18),
@@ -206,7 +205,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
                 Navigator.maybePop(context);
               },
             ),
-            FlatButton(
+            TextButton(
               child: Text(
                 "I understand",
                 style: const TextStyle(fontSize: 18),
