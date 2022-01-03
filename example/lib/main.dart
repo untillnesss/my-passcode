@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
 const storedPasscode = '123456';
 
 class ExampleHomePage extends StatefulWidget {
-  ExampleHomePage({Key key, this.title}) : super(key: key);
-  final String title;
+  ExampleHomePage({required Key key, this.title}) : super(key: key);
+  final String? title;
 
   @override
   State<StatefulWidget> createState() => _ExampleHomePageState();
@@ -40,7 +40,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.title!),
       ),
       body: Center(
         child: Column(
@@ -91,11 +91,11 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
   }
 
   _showLockScreen(BuildContext context,
-      {bool opaque,
-      CircleUIConfig circleUIConfig,
-      KeyboardUIConfig keyboardUIConfig,
-      Widget cancelButton,
-      List<String> digits}) {
+      {required bool opaque,
+      CircleUIConfig? circleUIConfig,
+      KeyboardUIConfig? keyboardUIConfig,
+      Widget? cancelButton,
+      List<String>? digits}) {
     Navigator.push(
         context,
         PageRouteBuilder(
@@ -108,10 +108,10 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
               textAlign: TextAlign.center,
               style: TextStyle(color: Colors.white, fontSize: 28),
             ),
-            circleUIConfig: circleUIConfig,
-            keyboardUIConfig: keyboardUIConfig,
+            circleUIConfig: circleUIConfig!,
+            keyboardUIConfig: keyboardUIConfig!,
             passwordEnteredCallback: _onPasscodeEntered,
-            cancelButton: cancelButton,
+            cancelButton: cancelButton!,
             deleteButton: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,7 +126,7 @@ class _ExampleHomePageState extends State<ExampleHomePage> {
             shouldTriggerVerification: _verificationNotifier.stream,
             backgroundColor: Colors.red.withOpacity(0.8),
             cancelCallback: _onPasscodeCancelled,
-            digits: digits,
+            digits: digits!,
             passwordDigits: 6,
             bottomWidget: _buildPasscodeRestoreButton(),
           ),

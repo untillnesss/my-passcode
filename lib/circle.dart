@@ -16,7 +16,7 @@ class Circle extends StatelessWidget {
   final CircleUIConfig circleUIConfig;
   double extraSize = 0;
 
-  Circle({Key key, this.filled = false, @required this.circleUIConfig, this.extraSize = 0}) : super(key: key);
+  Circle({required Key key, this.filled = false, required this.circleUIConfig, this.extraSize = 0}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
